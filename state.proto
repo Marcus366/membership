@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package membership;
+
+message HeartBeatState {
+    uint32 generation = 1;
+    uint32 version = 2;
+}
+
+message EndPointState {
+    HeartBeatState hbstate = 1;
+}

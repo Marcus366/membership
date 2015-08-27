@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "state.proto";
+
+package membership;
+
+service Membership {
+    rpc Syn (SynPacket) returns (Empty) {}
+    rpc SynAck (SynAckPacket) returns (Empty) {}
+    rpc Ack (AckPacket) returns (Empty) {}
+}
+
+message Digest {
+    bytes endpoint = 1;
+    uint32 generation = 2;
+    uint32 version = 3;
+}
+
+message SynPacket {
+    /* a string stand for the cluster */
+    string id = 1;
+
+    repeated Digest digests = 2;
+}
+
+message SynAckPacket {
+    /* a string stand for the cluster */
+    string id = 1;
+
+    Digest digests = 2;
+    EndPointState states = 3;
+}
+
+message AckPacket {
+    /* a string stand for the cluster */
+    string id = 1;
+
+    EndPointState states = 3;
+}
+
+message Empty {
+}
+
